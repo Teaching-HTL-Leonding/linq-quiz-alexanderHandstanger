@@ -16,7 +16,13 @@ namespace LinqQuiz.Library
         /// </exception>
         public static int[] GetEvenNumbers(int exclusiveUpperLimit)
         {
-            throw new NotImplementedException();
+            if (exclusiveUpperLimit < 1) throw new ArgumentOutOfRangeException();
+            List<int> numbers = new List<int>();
+            for (int i = 1; i < exclusiveUpperLimit; i++)
+            {
+                numbers.Add(i);
+            }
+            return numbers.Where(n => n % 2 == 0).ToArray();
         }
 
         /// <summary>
@@ -33,7 +39,23 @@ namespace LinqQuiz.Library
         /// </remarks>
         public static int[] GetSquares(int exclusiveUpperLimit)
         {
-            throw new NotImplementedException();
+            if (exclusiveUpperLimit < 1)
+            {
+                int[] empty = new int[0];
+                return empty;
+            }
+            List<int> numbers = new List<int>();
+            for (int i = 1; i < exclusiveUpperLimit; i++)
+            {
+                numbers.Add(i);
+            }
+            checked
+            {
+                return numbers.Where(n => n % 7 == 0)
+                    .Select(n => n * n)
+                    .OrderByDescending(n => n)
+                    .ToArray();
+            }
         }
 
         /// <summary>
