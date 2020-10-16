@@ -104,7 +104,7 @@ namespace LinqQuiz.Library
         /// </remarks>
         public static (char letter, int numberOfOccurrences)[] GetLetterStatistic(string text)
         {
-            throw new NotImplementedException();
+            return text.Where(x => char.IsLetter(x)).GroupBy(x => x).Select(x => (letter: x.Key, numberOfOccurrences: x.Count())).ToArray();
         }
     }
 }
