@@ -74,7 +74,19 @@ namespace LinqQuiz.Library
         /// </remarks>
         public static FamilySummary[] GetFamilyStatistic(IReadOnlyCollection<IFamily> families)
         {
-            throw new NotImplementedException();
+            if (families == null) throw new ArgumentNullException();
+            FamilySummary[] result = new FamilySummary[families.Count];
+            int indexer = 0;
+            foreach (var item in families)
+            {
+                result[indexer] = new FamilySummary();
+                result[indexer].FamilyID = item.ID;
+                if (item.Persons.Count == 0) result[indexer].AverageAge = 0;
+                else result[indexer].AverageAge = item.Persons.Average(item => item.Age); 
+                result[indexer].NumberOfFamilyMembers = item.Persons.Count();
+                indexer++;
+            }
+            return result;
         }
 
         /// <summary>
